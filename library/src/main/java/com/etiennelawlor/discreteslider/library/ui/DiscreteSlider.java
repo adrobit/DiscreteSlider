@@ -34,6 +34,7 @@ public class DiscreteSlider extends FrameLayout {
     private OnDiscreteSliderChangeListener onDiscreteSliderChangeListener;
     private int discreteSeekBarLeftPadding = DisplayUtility.dp2px(getContext(), 32);
     private int discreteSeekBarRightPadding = DisplayUtility.dp2px(getContext(), 32);
+    private int initialProgress;
 
     // endregion
 
@@ -75,6 +76,7 @@ public class DiscreteSlider extends FrameLayout {
             backdropStrokeWidth = attributeArray.getDimension(R.styleable.DiscreteSlider_backdropStrokeWidth, 1);
             thumb = attributeArray.getDrawable(R.styleable.DiscreteSlider_thumb);
             progressDrawable = attributeArray.getDrawable(R.styleable.DiscreteSlider_progressDrawable);
+            initialProgress = attributeArray.getInteger(R.styleable.DiscreteSlider_initialProgress, 0);
         } finally {
             attributeArray.recycle();
         }
@@ -91,6 +93,7 @@ public class DiscreteSlider extends FrameLayout {
         discreteSeekBar = (DiscreteSeekBar)view.findViewById(R.id.discrete_seek_bar);
         discreteSeekBar.setTickMarkCount(tickMarkCount);
         discreteSeekBar.setPadding(discreteSeekBarLeftPadding,0,discreteSeekBarRightPadding,0);
+        discreteSeekBar.setProgress(initialProgress);
         if(thumb != null)
             discreteSeekBar.setThumb(thumb);
         if(progressDrawable != null)
@@ -103,6 +106,10 @@ public class DiscreteSlider extends FrameLayout {
                 }
             }
         });
+    }
+
+    public void setInitialProgress(int progress) {
+        discreteSeekBar.setProgress(progress * 100);
     }
 
     public void setTickMarkCount(int tickMarkCount){
