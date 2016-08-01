@@ -35,6 +35,7 @@ public class DiscreteSlider extends FrameLayout {
     private int discreteSeekBarLeftPadding = DisplayUtility.dp2px(getContext(), 32);
     private int discreteSeekBarRightPadding = DisplayUtility.dp2px(getContext(), 32);
     private int initialProgress;
+    private boolean isEnabled = true;
 
     // endregion
 
@@ -137,8 +138,10 @@ public class DiscreteSlider extends FrameLayout {
         discreteSliderBackdrop.setBackdropStrokeWidth(backdropStrokeWidth);
     }
 
-    public void setThumb(Drawable thumb){
-        discreteSeekBar.setThumb(thumb);
+    public void setThumb(Drawable thumb) {
+        if (isEnabled) {
+            discreteSeekBar.setThumb(thumb);
+        }
     }
 
     public void setProgressDrawable(Drawable progressDrawable){
@@ -146,7 +149,17 @@ public class DiscreteSlider extends FrameLayout {
     }
 
     public void setOnDiscreteSliderChangeListener(OnDiscreteSliderChangeListener onDiscreteSliderChangeListener) {
-        this.onDiscreteSliderChangeListener = onDiscreteSliderChangeListener;
+        if (isEnabled) {
+            this.onDiscreteSliderChangeListener = onDiscreteSliderChangeListener;
+        }
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.isEnabled = enabled;
+        discreteSeekBar.setEnabled(enabled);
+        if (!enabled) {
+            discreteSeekBar.setThumb(getResources().getDrawable(R.drawable.disabled_thumb));
+        }
     }
 
     public int getTickMarkCount() {

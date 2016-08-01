@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 Adrobit Technologies LLP
+  -->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+       android:shape="oval">
+
+    <size
+        android:width="30dp"
+        android:height="30dp"/>
+    <stroke
+        android:width="8dp"
+        android:color="#46cdcdcd"/>
+    <solid android:color="#cdcdcd"/>
+
+    <corners android:radius="1dp"/>
+
+</shape>
